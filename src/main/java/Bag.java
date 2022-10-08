@@ -14,6 +14,12 @@ public abstract class Bag {
      *       - an array of Strings named contents
      */
 
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private String[] contents;
+
+
 
 
 
@@ -28,6 +34,14 @@ public abstract class Bag {
      */
 
 
+    public Bag(String color, int capacity){
+        this.color = color;
+        this.capacity = capacity;
+        this.numberOfContents = 0;
+        this.contents = new String[capacity];
+    }
+
+
 
 
     /*
@@ -38,7 +52,17 @@ public abstract class Bag {
      *           - getCapacity
      */
 
+    public String getColor() {
+        return color;
+    }
 
+    public int getNumberOfContents() {
+        return numberOfContents;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
 
 
     /*
@@ -46,8 +70,9 @@ public abstract class Bag {
      *       color of this bag to the given color.
      */
 
-
-
+    public void setColor(String color) {
+        this.color = color;
+    }
 
 
     /*
@@ -61,7 +86,12 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
-
+    public void addItem(String item) {
+        if (getCapacity() > getNumberOfContents()) {
+            contents[numberOfContents] = item;
+            numberOfContents ++;
+        }
+    }
 
 
 
@@ -76,6 +106,15 @@ public abstract class Bag {
      * @return
      */
 
+    public String popItem(){
+
+        String temp = contents[numberOfContents - 1];
+        contents[numberOfContents - 1] = null;
+        numberOfContents --;
+        return temp;
+
+    }
+
 
 
 
@@ -86,7 +125,15 @@ public abstract class Bag {
      * @param n the amount to increase this Bag's capacity by
      */
     public void increaseCapacity(int n) {
-        // TODO: Implement this method.
+
+        String[] newContents = new String[capacity + n];
+
+        for(int i = 0; i < capacity; i++){
+            newContents[i] = contents[i];
+        }
+
+        contents = newContents;
+        capacity += n;
 
     }
 
